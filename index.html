@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rakshika AI | Women Safety</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='icon-192.png') }}">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="/">🛡️ Rakshika <span>AI</span></a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#ride-check">Ride Safety</a>
+      <a href="#contacts">Emergency Contacts</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">YOUR SAFETY, OUR PRIORITY</p>
+        <h1>Move freely.<br><span>Feel safer.</span></h1>
+        <p class="hero-text">
+          Simple tools to help you prepare for a journey,
+          keep emergency contacts handy, and access your
+          device location when you choose.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#ride-check">Check Ride Safety</a>
+          <a class="button danger" href="#sos">SOS Emergency</a>
+        </div>
+        <p class="disclaimer">
+          Demo project: ride details are not independently verified
+          and SOS does not automatically contact emergency services.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-label="Safety shield illustration">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="shield">🛡️</div>
+        <div class="float-card">✓ <span>Stay prepared</span></div>
+        <div class="float-card second">📍 <span>Your choice, your location</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="section-heading">
+        <p class="eyebrow">TOOLS FOR YOUR JOURNEY</p>
+        <h2>Your safety toolkit</h2>
+        <p>Useful features in one simple dashboard.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon purple">🚕</div>
+          <h3>Ride safety checklist</h3>
+          <p>Review your vehicle and driver details before starting a ride.</p>
+          <a href="#ride-check">Check a ride →</a>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon pink">🆘</div>
+          <h3>Emergency contacts</h3>
+          <p>Save trusted contacts and open your phone's calling app when needed.</p>
+          <a href="#contacts">Manage contacts →</a>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon blue">📍</div>
+          <h3>Location sharing</h3>
+          <p>Choose when to request your location and copy it to share yourself.</p>
+          <a href="#location">Open location tool →</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section two-column" id="ride-check">
+      <div class="section-heading left">
+        <p class="eyebrow">BEFORE YOU TRAVEL</p>
+        <h2>Ride safety checker</h2>
+        <p>
+          Enter the details you have and use the checklist to review them.
+          This demo cannot verify a driver or vehicle against official records.
+        </p>
+      </div>
+
+      <form class="panel" id="rideForm">
+        <label for="vehicle">Vehicle registration number</label>
+        <input id="vehicle" name="vehicle"
+               placeholder="e.g. RJ14AB1234" maxlength="20" required>
+
+        <label for="driver">Driver name (if available)</label>
+        <input id="driver" name="driver" placeholder="Enter driver name">
+
+        <label for="rideProvider">Ride provider</label>
+        <input id="rideProvider" name="rideProvider"
+               placeholder="App or provider name">
+
+        <button class="button primary full" type="submit">
+          Review ride details
+        </button>
+        <div id="rideResult" class="result" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section class="section two-column" id="contacts">
+      <div class="section-heading left">
+        <p class="eyebrow">PEOPLE YOU TRUST</p>
+        <h2>Emergency contacts</h2>
+        <p>
+          Add a trusted person's name and phone number.
+          Contacts are saved in this browser on this device,
+          not in a secure account database.
+        </p>
+      </div>
+
+      <div class="panel">
+        <form id="contactForm">
+          <label for="contactName">Contact name</label>
+          <input id="contactName" required placeholder="e.g. Family member">
+
+          <label for="contactPhone">Phone number</label>
+          <input id="contactPhone" type="tel"
+                 required placeholder="Enter phone number">
+
+          <button class="button primary full" type="submit">Save contact</button>
+        </form>
+        <div id="contactList" class="contact-list"></div>
+      </div>
+    </section>
+
+    <section class="section location-section" id="location">
+      <div>
+        <p class="eyebrow">SHARE ONLY WHEN YOU CHOOSE</p>
+        <h2>My current location</h2>
+        <p>
+          Your browser will ask permission. Location access requires
+          a supported browser and secure context such as localhost or HTTPS.
+        </p>
+      </div>
+
+      <div class="location-actions">
+        <button class="button primary" id="locationBtn" type="button">
+          Get my location
+        </button>
+        <button class="button secondary" id="copyLocationBtn"
+                type="button" disabled>
+          Copy location link
+        </button>
+        <p id="locationResult" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="section sos-section" id="sos">
+      <div>
+        <p class="eyebrow">EMERGENCY PREPAREDNESS</p>
+        <h2>Need help quickly?</h2>
+        <p>Choose an action below. The site will not silently call or message anyone.</p>
+
+        <div class="sos-actions">
+          <button class="button danger" id="sosBtn" type="button">
+            🆘 SOS Emergency
+          </button>
+          <a class="button secondary" href="tel:112">Call 112 (India)</a>
+        </div>
+
+        <p class="disclaimer">
+          If you are in immediate danger in India, call 112 directly
+          when safe to do so. This website is a demo and does not
+          contact emergency services automatically.
+        </p>
+      </div>
+
+      <div class="panel sos-panel" id="sosPanel" hidden>
+        <h3>Choose an emergency action</h3>
+        <p id="sosStatus" role="status" aria-live="polite">
+          Select a trusted contact or prepare a message.
+        </p>
+
+        <label for="sosContact">Trusted contact</label>
+        <select id="sosContact">
+          <option value="">Choose a saved contact</option>
+        </select>
+
+        <div class="sos-actions">
+          <a class="button primary" id="sosCallContact"
+             href="#sos" aria-disabled="true">Call contact</a>
+          <button class="button secondary" id="prepareMessage" type="button">
+            Prepare message
+          </button>
+          <button class="button secondary" id="closeSos" type="button">
+            Close
+          </button>
+        </div>
+
+        <textarea id="emergencyMessage" rows="4"
+                  placeholder="Your emergency message will appear here."
+                  aria-label="Emergency message"></textarea>
+
+        <button class="button primary full" id="shareMessage"
+                type="button" disabled>
+          Share / open messaging app
+        </button>
+
+        <p class="disclaimer">
+          Review the message and recipient before sending.
+          Your location is included only if you choose to request it.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand" href="/">🛡️ Rakshika <span>AI</span></a>
+    <p>Student demo project · Safety tools support preparation but cannot guarantee safety.</p>
+  </footer>
+
+  <script>
+    // RIDE SAFETY CHECKER
+    const rideForm = document.getElementById('rideForm');
+
+    rideForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const vehicle = document.getElementById('vehicle').value.trim();
+      const driver = document.getElementById('driver').value.trim();
+      const provider = document.getElementById('rideProvider').value.trim();
+      const result = document.getElementById('rideResult');
+
+      result.className = 'result';
+      result.innerHTML =
+        '<strong>Checklist — not an official verification</strong><ul>' +
+        '<li>Compare vehicle number with the app booking: ' +
+        escapeHtml(vehicle) + '</li>' +
+        '<li>Driver name provided: ' +
+        (driver ? 'Yes' : 'Not entered') + '</li>' +
+        '<li>Ride provider: ' +
+        (provider ? escapeHtml(provider) : 'Not entered') + '</li>' +
+        '<li>Before entering, check the vehicle and driver match your booking.</li>' +
+        '</ul><p>No government or provider database was checked.</p>';
+    });
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>"']/g, ch => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[ch]));
+    }
+
+    // EMERGENCY CONTACTS
+    const contactForm = document.getElementById('contactForm');
+    const contactList = document.getElementById('contactList');
+
+    function renderContacts() {
+      let contacts = [];
+
+      try {
+        contacts = JSON.parse(
+          localStorage.getItem('rakshikaContacts') || '[]'
+        );
+      } catch (_) {}
+
+      contactList.replaceChildren();
+
+      contacts.forEach((contact, index) => {
+        const item = document.createElement('div');
+        item.className = 'contact-item';
+
+        const info = document.createElement('div');
+        const name = document.createElement('strong');
+        name.textContent = contact.name;
+
+        const phone = document.createElement('p');
+        phone.textContent = contact.phone;
+
+        info.append(name, phone);
+
+        const actions = document.createElement('div');
+        actions.className = 'contact-actions';
+
+        const call = document.createElement('a');
+        call.className = 'button small primary';
+        call.href = 'tel:' + contact.phone.replace(/[^+\\d]/g, '');
+        call.textContent = 'Call';
+
+        const remove = document.createElement('button');
+        remove.className = 'button small secondary';
+        remove.textContent = 'Delete';
+
+        remove.addEventListener('click', () => {
+          contacts.splice(index, 1);
+          localStorage.setItem(
+            'rakshikaContacts', JSON.stringify(contacts)
+          );
+          renderContacts();
+          refreshSosContacts();
+        });
+
+        actions.append(call, remove);
+        item.append(info, actions);
+        contactList.append(item);
+      });
+    }
+
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const name = document.getElementById('contactName').value.trim();
+      const phone = document.getElementById('contactPhone').value.trim();
+
+      if (!name || !phone) return;
+
+      let contacts = [];
+      try {
+        contacts = JSON.parse(
+          localStorage.getItem('rakshikaContacts') || '[]'
+        );
+      } catch (_) {}
+
+      contacts.push({ name, phone });
+
+      localStorage.setItem(
+        'rakshikaContacts', JSON.stringify(contacts)
+      );
+
+      contactForm.reset();
+      renderContacts();
+      refreshSosContacts();
+    });
+
+    // SOS EMERGENCY ACTIONS
+    const sosBtn = document.getElementById('sosBtn');
+    const sosPanel = document.getElementById('sosPanel');
+    const sosContact = document.getElementById('sosContact');
+    const sosCallContact = document.getElementById('sosCallContact');
+    const sosStatus = document.getElementById('sosStatus');
+    const emergencyMessage = document.getElementById('emergencyMessage');
+    const shareMessage = document.getElementById('shareMessage');
+
+    function readContacts() {
+      try {
+        return JSON.parse(
+          localStorage.getItem('rakshikaContacts') || '[]'
+        );
+      } catch (_) {
+        return [];
+      }
+    }
+
+    function refreshSosContacts() {
+      const previous = sosContact.value;
+      sosContact.replaceChildren();
+
+      const first = document.createElement('option');
+      first.value = '';
+      first.textContent = 'Choose a saved contact';
+      sosContact.append(first);
+
+      readContacts().forEach((contact, index) => {
+        const option = document.createElement('option');
+        option.value = String(index);
+        option.textContent = `${contact.name} — ${contact.phone}`;
+        sosContact.append(option);
+      });
+
+      if ([...sosContact.options].some(o => o.value === previous)) {
+        sosContact.value = previous;
+      }
+
+      updateSosCallLink();
+    }
+
+    function updateSosCallLink() {
+      const contact = readContacts()[Number(sosContact.value)];
+
+      if (contact && sosContact.value !== '') {
+        sosCallContact.href =
+          'tel:' + contact.phone.replace(/[^+\\d]/g, '');
+        sosCallContact.setAttribute('aria-disabled', 'false');
+        sosCallContact.style.opacity = '1';
+      } else {
+        sosCallContact.href = '#sos';
+        sosCallContact.setAttribute('aria-disabled', 'true');
+        sosCallContact.style.opacity = '.5';
+      }
+    }
+
+    sosBtn.addEventListener('click', () => {
+      sosPanel.hidden = false;
+      refreshSosContacts();
+      sosStatus.textContent =
+        'Select a trusted contact. You choose whether to call or prepare a message.';
+      sosPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    sosContact.addEventListener('change', updateSosCallLink);
+
+    document.getElementById('closeSos').addEventListener('click', () => {
+      sosPanel.hidden = true;
+      emergencyMessage.value = '';
+      shareMessage.disabled = true;
+    });
+
+    document.getElementById('prepareMessage').addEventListener('click', () => {
+      const contact = readContacts()[Number(sosContact.value)];
+
+      if (!contact || sosContact.value === '') {
+        sosStatus.textContent =
+          'Please choose a saved trusted contact first.';
+        return;
+      }
+
+      emergencyMessage.value =
+        'Emergency: I may need help. Please contact me as soon as you can.';
+
+      shareMessage.disabled = false;
+      sosStatus.textContent =
+        `Message prepared for ${contact.name}. You can add your location below if you choose.`;
+    });
+
+    shareMessage.addEventListener('click', () => {
+      const contact = readContacts()[Number(sosContact.value)];
+
+      if (!contact || !emergencyMessage.value.trim()) {
+        sosStatus.textContent =
+          'Choose a contact and prepare the message first.';
+        return;
+      }
+
+      const url = 'sms:' +
+        contact.phone.replace(/[^+\\d]/g, '') +
+        '?body=' + encodeURIComponent(emergencyMessage.value);
+
+      window.location.href = url;
+
+      sosStatus.textContent =
+        'Your messaging app should open if your device/browser supports this link. Review and send the message yourself.';
+    });
+
+    // LOCATION ACCESS
+    let locationLink = '';
+    const locationResult = document.getElementById('locationResult');
+    const copyLocationBtn = document.getElementById('copyLocationBtn');
+
+    document.getElementById('locationBtn').addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        locationResult.textContent =
+          'Geolocation is not supported by this browser.';
+        return;
+      }
+
+      locationResult.textContent = 'Requesting location permission…';
+
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          locationLink = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+
+          locationResult.textContent =
+            `Location received: ${lat.toFixed(5)}, ${lon.toFixed(5)}. Share only with someone you trust.`;
+
+          copyLocationBtn.disabled = false;
+
+          if (!sosPanel.hidden && emergencyMessage.value.trim()) {
+            sosStatus.textContent =
+              'Location is available. Choose whether to add it to your message.';
+
+            if (!document.getElementById('addLocationToMessage')) {
+              const addLoc = document.createElement('button');
+
+              addLoc.type = 'button';
+              addLoc.id = 'addLocationToMessage';
+              addLoc.className = 'button secondary';
+              addLoc.textContent = 'Add location to message';
+
+              addLoc.addEventListener('click', () => {
+                emergencyMessage.value +=
+                  '\\nMy location: ' + locationLink;
+
+                sosStatus.textContent =
+                  'Location added. Review the message before sharing.';
+              });
+
+              sosPanel.querySelector('.sos-actions').append(addLoc);
+            }
+          }
+        },
+        error => {
+          locationResult.textContent =
+            error.code === 1
+              ? 'Location permission was denied. You can allow it in browser site settings.'
+              : 'Could not get location. Check permission and try again.';
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        }
+      );
+    });
+
+    copyLocationBtn.addEventListener('click', async () => {
+      if (!locationLink) return;
+
+      try {
+        await navigator.clipboard.writeText(locationLink);
+        locationResult.textContent =
+          'Location link copied. Send it only to a trusted person.';
+      } catch (_) {
+        locationResult.textContent = locationLink;
+      }
+    });
+
+    // Load saved contacts on page open
+    renderContacts();
+    refreshSosContacts();
+  </script>
+  
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/sw.js")
+        .then(() => console.log("Rakshika AI service worker registered"))
+        .catch((error) => console.error("Service worker error:", error));
+    });
+  }
+</script>
+</body>
+</html>
